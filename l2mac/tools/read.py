@@ -85,6 +85,8 @@ def load_code_files_into_dict(folder_path, number_lines=False, file_extensions=N
             ".txt",
             ".xml",
             ".sql",
+            ".v",
+            ".sv",
         ]
     else:
         code_file_extensions = file_extensions

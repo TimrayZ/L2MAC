@@ -11,6 +11,8 @@ def get_env(domain: Domain, config: L2MACConfig, logger, seed: int):
         return GeneralEnvironment(config=config, logger=logger, seed=seed, env_name="Codebase")
     elif domain == Domain.book:
         return GeneralEnvironment(config=config, logger=logger, seed=seed, env_name="Book")
+    elif domain == Domain.custom:
+        return GeneralEnvironment(config=config, logger=logger, seed=seed, env_name="Custom")
     else:
         raise Exception(
             f'Domain {domain} environment not found, please use "codebase" or "book", or implement a new domain for your task.'

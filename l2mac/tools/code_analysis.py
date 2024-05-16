@@ -32,6 +32,21 @@ def check_pytest_with_timeout(file_dict):
 
 @timeout(60, timeout_exception=StopIteration)
 def check_syntax(file_dict: dict):
+    # temporary alternative to pylint FOR VERILOG ONLY
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        write_files_from_dict(file_dict, tmpdirname)
+        #command = ["vlog", "-parseonly", "-lint", "-work", "work"]
+        #for file_name in file_dict.keys():
+        #    command.append(file_name)
+        #result = subprocess.run(command, capture_output=True, text=True, cwd=tmpdirname)
+        #stdout = result.stdout
+        print("check out the tmpdir at: ", tmpdirname)
+        result = print("key in manual test result: ")
+        if "pass" in result.lower():
+            return "All tests passed."
+        else:
+            return f"Failed tests. Please check the output below. {result}"
+    return 
     external_modules = find_external_modules(file_dict)
     ignored_modules = ",".join(external_modules)
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -82,6 +97,19 @@ def check_syntax(file_dict: dict):
 
 @timeout(60, timeout_exception=StopIteration)
 def check_pytest(file_dict: dict):
+    # temporary alternative to pytest FOR VERILOG ONLY
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        write_files_from_dict(file_dict, tmpdirname)
+        #command = ["python3", "-m", "pytest", "--junitxml=result_pytest.xml"]
+        #result = subprocess.run(command, capture_output=True, text=True, cwd=tmpdirname)
+        #stdout = result.stdout
+        print("check out the tmpdir at: ", tmpdirname)
+        result = print("key in manual test result: ")
+        if "pass" in result.lower():
+            return "All tests passed."
+        else:
+            return f"Failed tests. Please check the output below. {result}"
+    return "Manual tests passed."
     with tempfile.TemporaryDirectory() as tmpdirname:
         write_files_from_dict(file_dict, tmpdirname)
         command = ["python3", "-m", "pytest", "--junitxml=result_pytest.xml"]
